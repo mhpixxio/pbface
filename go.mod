@@ -1,4 +1,4 @@
-module pbface
+module github.com/mhpixxio/pbface
 
 go 1.18
 
