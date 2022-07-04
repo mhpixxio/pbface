@@ -21,7 +21,7 @@ service BytesService {
 message FaceRequest {
   int32 fileID = 1;
   string format = 2;
-  Bytesmessage bytesmes = 3;
+  bytes bytesmes = 3;
 }
 
 message Face {
