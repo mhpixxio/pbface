@@ -2,22 +2,6 @@ syntax="proto3";
 
 option go_package = "../pbface";
 
-message Textmessage {
-  string textmes = 1;
-}
-
-service TextService {
-  rpc TextFunc(Textmessage) returns (Textmessage) {}
-}
-
-message Bytesmessage {
-  bytes bytesmes = 1;
-}
-
-service BytesService {
-	rpc BytesFunc(Bytesmessage) returns (Bytesmessage) {}
-}
-
 message FaceRequest {
   int32 fileID = 1;
   string format = 2;
