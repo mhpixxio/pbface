@@ -4,8 +4,9 @@ option go_package = "../pbface";
 
 message FaceRequest {
   int32 fileID = 1;
-  string format = 2;
-  bytes bytesmes = 3;
+  string filepath = 2;
+  string format = 3;
+  bytes bytesmes = 4;
 }
 
 message Face {
@@ -18,7 +19,8 @@ message Face {
 
 message FaceResponse {
   int32 fileID = 1;
-  repeated Face faceres = 2;
+  string filepath = 2;
+  repeated Face faceres = 3;
 }
 
 service FaceService {
