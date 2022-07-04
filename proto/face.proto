@@ -1,0 +1,42 @@
+syntax="proto3";
+
+option go_package = "../pbface";
+
+message Textmessage {
+  string textmes = 1;
+}
+
+service TextService {
+  rpc TextFunc(Textmessage) returns (Textmessage) {}
+}
+
+message Bytesmessage {
+  bytes bytesmes = 1;
+}
+
+service BytesService {
+	rpc BytesFunc(Bytesmessage) returns (Bytesmessage) {}
+}
+
+message FaceRequest {
+  int32 fileID = 1;
+  string format = 2;
+  Bytesmessage bytesmes = 3;
+}
+
+message Face {
+  int32 x1 = 1;
+  int32 y1 = 2;
+  int32 x2 = 3;
+  int32 y2 = 4;
+  repeated int32 v = 5;
+}
+
+message FaceResponse {
+  int32 fileID = 1;
+  repeated Face faceres = 2;
+}
+
+service FaceService {
+	rpc FaceFunc(FaceRequest) returns (FaceResponse) {}
+}
