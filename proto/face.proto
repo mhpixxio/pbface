@@ -14,7 +14,7 @@ message Face {
   int32 y1 = 2;
   int32 x2 = 3;
   int32 y2 = 4;
-  repeated int32 v = 5;
+  repeated float v = 5;
 }
 
 message FaceResponse {
