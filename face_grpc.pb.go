@@ -103,3 +103,89 @@ var FaceService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "face.proto",
 }
+
+// ClusterServiceClient is the client API for ClusterService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ClusterServiceClient interface {
+	ClusterFunc(ctx context.Context, in *ClusterRequest, opts ...grpc.CallOption) (*ClusterResponse, error)
+}
+
+type clusterServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewClusterServiceClient(cc grpc.ClientConnInterface) ClusterServiceClient {
+	return &clusterServiceClient{cc}
+}
+
+func (c *clusterServiceClient) ClusterFunc(ctx context.Context, in *ClusterRequest, opts ...grpc.CallOption) (*ClusterResponse, error) {
+	out := new(ClusterResponse)
+	err := c.cc.Invoke(ctx, "/ClusterService/ClusterFunc", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ClusterServiceServer is the server API for ClusterService service.
+// All implementations must embed UnimplementedClusterServiceServer
+// for forward compatibility
+type ClusterServiceServer interface {
+	ClusterFunc(context.Context, *ClusterRequest) (*ClusterResponse, error)
+	mustEmbedUnimplementedClusterServiceServer()
+}
+
+// UnimplementedClusterServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedClusterServiceServer struct {
+}
+
+func (UnimplementedClusterServiceServer) ClusterFunc(context.Context, *ClusterRequest) (*ClusterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClusterFunc not implemented")
+}
+func (UnimplementedClusterServiceServer) mustEmbedUnimplementedClusterServiceServer() {}
+
+// UnsafeClusterServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ClusterServiceServer will
+// result in compilation errors.
+type UnsafeClusterServiceServer interface {
+	mustEmbedUnimplementedClusterServiceServer()
+}
+
+func RegisterClusterServiceServer(s grpc.ServiceRegistrar, srv ClusterServiceServer) {
+	s.RegisterService(&ClusterService_ServiceDesc, srv)
+}
+
+func _ClusterService_ClusterFunc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ClusterFunc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ClusterService/ClusterFunc",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ClusterFunc(ctx, req.(*ClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ClusterService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "ClusterService",
+	HandlerType: (*ClusterServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ClusterFunc",
+			Handler:    _ClusterService_ClusterFunc_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "face.proto",
+}

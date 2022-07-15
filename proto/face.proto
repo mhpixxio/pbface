@@ -26,3 +26,16 @@ message FaceResponse {
 service FaceService {
 	rpc FaceFunc(FaceRequest) returns (FaceResponse) {}
 }
+
+message ClusterRequest {
+  int32 faceID = 1;
+}
+
+message ClusterResponse {
+  int32 faceID = 1;
+  int32 clusterID = 2;
+}
+
+service ClusterService {
+	rpc ClusterFunc(ClusterRequest) returns (ClusterResponse) {}
+}
