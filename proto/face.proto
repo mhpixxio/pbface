@@ -5,8 +5,7 @@ option go_package = "../pbface";
 message FaceRequest {
   int32 fileID = 1;
   string pathtofile = 2;
-  string format = 3;
-  bytes bytesmes = 4;
+  bytes bytesmes = 3;
 }
 
 message Face {
